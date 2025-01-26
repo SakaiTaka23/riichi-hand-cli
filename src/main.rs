@@ -1,4 +1,8 @@
+use std::borrow::Cow;
+
+use arboard::Clipboard;
 use clap::Parser;
+use image::RgbaImage;
 use riichi_hand::parser::HandParser;
 use riichi_hand::raster_renderer::fluffy_stuff_tile_sets::{
     BLACK_FLUFFY_STUFF_TILE_SET, RED_FLUFFY_STUFF_TILE_SET, YELLOW_FLUFFY_STUFF_TILE_SET,
@@ -31,8 +35,8 @@ struct Args {
     hand: String,
 
     /// Name and path of the image to save
-    #[arg(short, long, default_value = "hand.png")]
-    name: String,
+    #[arg(short, long)]
+    name: Option<String>,
 
     /// Tile design to use
     #[arg(short, long, default_value = "yellow")]
@@ -52,7 +56,20 @@ fn main() {
         "black" => RasterRenderer::render(&hand, &*BLACK_FLUFFY_STUFF_TILE_SET, options),
         "martin" => RasterRenderer::render(&hand, &*MARTIN_PERSSON_TILE_SET, options),
         _ => panic!("invalid tile set {}", tile),
-    };
+    }
+    .unwrap();
 
-    image.unwrap().save(name).unwrap();
+    if name.is_none() {
+        let mut clipboard = Clipboard::new().unwrap();
+        let rgba: RgbaImage = image.into();
+        clipboard
+            .set_image(arboard::ImageData {
+                width: rgba.width() as usize,
+                height: rgba.height() as usize,
+                bytes: Cow::Owned(rgba.as_raw().to_vec()),
+            })
+            .unwrap();
+    } else {
+        image.save(name.unwrap()).unwrap();
+    };
 }
