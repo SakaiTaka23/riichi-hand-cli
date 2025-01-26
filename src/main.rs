@@ -1,4 +1,5 @@
 use std::borrow::Cow;
+use std::path::Path;
 
 use arboard::Clipboard;
 use clap::Parser;
@@ -70,6 +71,25 @@ fn main() {
             })
             .unwrap();
     } else {
-        image.save(name.unwrap()).unwrap();
+        image.save(get_available_filename(&name.unwrap())).unwrap();
     };
+}
+
+fn get_available_filename(original_path: &String) -> String {
+    if !Path::new(original_path).exists() {
+        return original_path.to_string();
+    }
+
+    let path = Path::new(original_path);
+    let stem = path.file_stem().unwrap().to_str().unwrap();
+    let ext = path.extension().unwrap().to_str().unwrap();
+
+    let mut counter = 1;
+    loop {
+        let new_name = format!("{}({}).{}", stem, counter, ext);
+        if !Path::new(&new_name).exists() {
+            return new_name;
+        }
+        counter += 1;
+    }
 }
