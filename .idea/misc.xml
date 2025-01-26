@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id>DOM 関連の問題JavaScript と TypeScript</id>
+          </State>
+          <State>
+            <id>JavaScript と TypeScript</id>
+          </State>
+          <State>
+            <id>XPath</id>
+          </State>
+          <State>
+            <id>制御フロー問題JavaScript と TypeScript</id>
+          </State>
+          <State>
+            <id>国際化</id>
+          </State>
+          <State>
+            <id>妥当性の問題JavaScript と TypeScript</id>
+          </State>
+          <State>
+            <id>正規表現</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
+  </component>
+</project>
