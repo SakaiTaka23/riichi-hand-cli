@@ -2,6 +2,14 @@
 name = "riichi-hand-cli"
 version = "0.1.0"
 edition = "2021"
+authors = ["Takafumi Sakai <tt3.sakai@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+description = "Cli wrapper of riichi-hand"
+repository = "https://github.com/SakaiTaka23/riichi-hand-cli"
+keywords = ["riichi", "mahjong"]
+categories = ["command-line-utilities"]
+exclude = [".gitignore"]
 
 [dependencies]
 arboard = "3.4.1"

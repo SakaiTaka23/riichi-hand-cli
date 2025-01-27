@@ -33,9 +33,12 @@ More examples:
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = LONG_ABOUT)]
 struct Args {
+    /// Mahjong hand in human readable format
+    /// --help for more information
     hand: String,
 
-    /// Name and path of the image to save
+    /// Name and path of the image to save.
+    /// If not specified, the image will be copied to clipboard
     #[arg(short, long)]
     name: Option<String>,
 
