@@ -34,4 +34,9 @@ pub struct Args {
     /// Tile design to use
     #[arg(short, long, default_value = "yellow")]
     pub tile: String,
+
+    /// Interactive mode
+    /// Can generate multiple images in the same session
+    #[arg(short, long, default_value_t = false)]
+    pub interactive: bool,
 }
