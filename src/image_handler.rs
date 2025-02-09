@@ -13,12 +13,12 @@ pub fn save_to_clipboard(image: RgbaImage) -> Result<(), Box<dyn std::error::Err
     Ok(())
 }
 
-pub fn save_as_file(image: RgbaImage, file_name: String) -> Result<(), Box<dyn std::error::Error>> {
+pub fn save_as_file(image: RgbaImage, file_name: &str) -> Result<(), Box<dyn std::error::Error>> {
     image.save(get_available_filename(&file_name))?;
     Ok(())
 }
 
-fn get_available_filename(original_path: &String) -> String {
+fn get_available_filename(original_path: &str) -> String {
     if !Path::new(original_path).exists() {
         return original_path.to_string();
     }
