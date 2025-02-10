@@ -16,8 +16,8 @@ fn main() {
     } = args;
     let options = RenderOptions::default();
 
-    process_hand(hand, name.clone(), tile.clone(), options).unwrap();
+    process_hand(&hand, &name, &tile, options).unwrap();
     if interactive {
-        interactive_mode(name, tile, options);
+        interactive_mode(&name, &tile, options);
     }
 }

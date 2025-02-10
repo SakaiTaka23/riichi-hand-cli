@@ -15,13 +15,13 @@ use riichi_hand::{
 use crate::image_handler::{save_as_file, save_to_clipboard};
 
 pub fn process_hand(
-    hand: String,
-    name: Option<String>,
-    tile: String,
+    hand: &str,
+    name: &Option<String>,
+    tile: &str,
     options: RenderOptions,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let hand = &HandParser::parse(hand.as_str())?;
-    let image = match tile.as_str() {
+    let hand = &HandParser::parse(hand)?;
+    let image = match tile {
         "yellow" => RasterRenderer::render(hand, &*YELLOW_FLUFFY_STUFF_TILE_SET, options),
         "red" => RasterRenderer::render(hand, &*RED_FLUFFY_STUFF_TILE_SET, options),
         "black" => RasterRenderer::render(hand, &*BLACK_FLUFFY_STUFF_TILE_SET, options),
@@ -31,15 +31,15 @@ pub fn process_hand(
     .unwrap();
     let rgba: RgbaImage = image.into();
 
-    if name.is_none() {
-        save_to_clipboard(rgba)?;
-    } else {
-        save_as_file(rgba, name.unwrap())?;
-    };
+    match name {
+        Some(name) => save_as_file(rgba, name)?,
+        None => save_to_clipboard(rgba)?,
+    }
+
     Ok(())
 }
 
-pub fn interactive_mode(name: Option<String>, tile: String, options: RenderOptions) {
+pub fn interactive_mode(name: &Option<String>, tile: &str, options: RenderOptions) {
     loop {
         print!(">> ");
         io::stdout().flush().unwrap();
@@ -51,7 +51,7 @@ pub fn interactive_mode(name: Option<String>, tile: String, options: RenderOptio
             break;
         }
 
-        if let Err(e) = process_hand(hand.to_string(), name.clone(), tile.clone(), options) {
+        if let Err(e) = process_hand(&hand, name, tile, options) {
             println!("Error: {}", e);
         }
     }
