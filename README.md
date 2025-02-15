@@ -17,11 +17,12 @@ Cli wrapper of riichi-hand
 Usage: riichi-hand-cli [OPTIONS] <HAND>
 
 Arguments:
-  <HAND>  Mahjong hand in human readable format --help for more information
+  <HAND>  Mahjong hand in human-readable format --help for more information
 
 Options:
   -n, --name <NAME>  Name and path of the image to save. If not specified, the image will be copied to clipboard
   -t, --tile <TILE>  Tile design to use [default: yellow]
+  -i, --interactive  Interactive mode Can generate multiple images in the same session
   -h, --help         Print help (see more with '--help')
   -V, --version      Print version
 ```
