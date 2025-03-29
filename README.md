@@ -35,6 +35,9 @@ riichi-hand-cli --help
 # example
 
 ```shell
+# interactive mode
+riichi-hand-cli
+# simple one hand
 riichi-hand-cli --name hand.png --tile yellow 123456789s567p99m
 # short hand command
 riichi-hand-cli -n hand.png -t yellow 123456789s567p99m

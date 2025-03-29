@@ -24,7 +24,7 @@ More examples:
 pub struct Args {
     /// Mahjong hand in human-readable format
     /// --help for more information
-    pub hand: String,
+    pub hand: Option<String>,
 
     /// Name and path of the image to save.
     /// If not specified, the image will be copied to clipboard
