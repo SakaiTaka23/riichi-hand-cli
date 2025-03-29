@@ -16,3 +16,4 @@ arboard = "3.4.1"
 clap = { version = "4.5.27", features = ["derive"] }
 image = "0.25.5"
 riichi_hand = "0.6.3"
+rustyline = "15.0.0"
