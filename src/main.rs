@@ -16,8 +16,10 @@ fn main() {
     } = args;
     let options = RenderOptions::default();
 
-    process_hand(&hand, &name, &tile, options).unwrap();
-    if interactive {
+    if let Some(h) = &hand {
+        process_hand(&h, &name, &tile, options).unwrap();
+    }
+    if hand.is_none() || interactive {
         interactive_mode(&name, &tile, options);
     }
 }

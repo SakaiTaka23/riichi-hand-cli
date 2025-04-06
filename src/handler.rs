@@ -1,5 +1,3 @@
-use std::io::{self, Write};
-
 use image::RgbaImage;
 use riichi_hand::{
     parser::HandParser,
@@ -11,6 +9,7 @@ use riichi_hand::{
         RasterRenderer, RenderOptions,
     },
 };
+use rustyline::{Config, DefaultEditor, EditMode};
 
 use crate::image_handler::{save_as_file, save_to_clipboard};
 
@@ -40,19 +39,25 @@ pub fn process_hand(
 }
 
 pub fn interactive_mode(name: &Option<String>, tile: &str, options: RenderOptions) {
+    let config = Config::builder().edit_mode(EditMode::Vi).build();
+    let mut rl = DefaultEditor::with_config(config).unwrap();
     loop {
-        print!(">> ");
-        io::stdout().flush().unwrap();
+        let readline = rl.readline(">> ");
+        match readline {
+            Ok(line) => {
+                let hand = line.trim();
+                if hand == "exit" || hand.is_empty() {
+                    break;
+                }
+                if let Err(e) = rl.add_history_entry(line.as_str()) {
+                    println!("Error: {}", e);
+                }
 
-        let mut hand = String::new();
-        io::stdin().read_line(&mut hand).unwrap();
-        let hand = hand.trim();
-        if hand == "exit" || hand.is_empty() {
-            break;
-        }
-
-        if let Err(e) = process_hand(&hand, name, tile, options) {
-            println!("Error: {}", e);
+                if let Err(e) = process_hand(&hand, name, tile, options) {
+                    println!("Error: {}", e);
+                }
+            }
+            Err(_) => break,
         }
     }
 }

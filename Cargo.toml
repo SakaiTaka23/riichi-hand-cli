@@ -1,6 +1,6 @@
 [package]
 name = "riichi-hand-cli"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 authors = ["Takafumi Sakai <tt3.sakai@gmail.com>"]
 readme = "README.md"
@@ -16,3 +16,4 @@ arboard = "3.4.1"
 clap = { version = "4.5.27", features = ["derive"] }
 image = "0.25.5"
 riichi_hand = "0.6.3"
+rustyline = "15.0.0"
